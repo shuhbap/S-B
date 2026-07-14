@@ -58,7 +58,6 @@
       padding: 0 32px;
     }
 
-    /* ---------- NAV ---------- */
     header {
       position: fixed;
       top: 0;
@@ -110,7 +109,6 @@
       color: var(--amber);
     }
 
-    /* ---------- HERO ---------- */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -154,13 +152,8 @@
     }
 
     @keyframes pulse {
-      0%,
-      100% {
-        box-shadow: 0 0 0 4px rgba(86, 194, 176, 0.15);
-      }
-      50% {
-        box-shadow: 0 0 0 8px rgba(86, 194, 176, 0.05);
-      }
+      0%, 100% { box-shadow: 0 0 0 4px rgba(86, 194, 176, 0.15); }
+      50% { box-shadow: 0 0 0 8px rgba(86, 194, 176, 0.05); }
     }
 
     h1.name {
@@ -172,9 +165,7 @@
       margin-bottom: 22px;
     }
 
-    h1.name .accent {
-      color: var(--amber);
-    }
+    h1.name .accent { color: var(--amber); }
 
     .role {
       font-size: clamp(1.1rem, 2.4vw, 1.5rem);
@@ -184,16 +175,9 @@
       font-weight: 400;
     }
 
-    .role strong {
-      color: var(--text);
-      font-weight: 500;
-    }
+    .role strong { color: var(--text); font-weight: 500; }
 
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
     .btn {
       font-family: 'IBM Plex Mono', monospace;
@@ -214,19 +198,11 @@
       font-weight: 600;
     }
 
-    .btn-primary:hover {
-      background: #ffc35c;
-      transform: translateY(-2px);
-    }
+    .btn-primary:hover { background: #ffc35c; transform: translateY(-2px); }
 
-    .btn-ghost {
-      color: var(--text);
-    }
+    .btn-ghost { color: var(--text); }
 
-    .btn-ghost:hover {
-      border-color: var(--text-dim);
-      background: var(--surface);
-    }
+    .btn-ghost:hover { border-color: var(--text-dim); background: var(--surface); }
 
     .scroll-cue {
       position: absolute;
@@ -246,15 +222,9 @@
       background: linear-gradient(var(--text-dim), transparent);
     }
 
-    /* ---------- SECTION ---------- */
-    .section {
-      padding: 120px 0;
-      border-top: 1px solid var(--border);
-    }
+    .section { padding: 120px 0; border-top: 1px solid var(--border); }
 
-    .section-head {
-      margin-bottom: 56px;
-    }
+    .section-head { margin-bottom: 56px; }
 
     .section-tag {
       font-family: 'IBM Plex Mono', monospace;
@@ -271,191 +241,72 @@
       letter-spacing: -0.02em;
     }
 
-    .section-sub {
-      color: var(--text-dim);
-      max-width: 560px;
-      margin-top: 14px;
-    }
+    .section-sub { color: var(--text-dim); max-width: 560px; margin-top: 14px; }
 
-    /* ---------- STACK with MARQUEE / RUNNING LINE ---------- */
-    .stack-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .stack-layers {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .layer {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: 8px;
-      padding: 12px 16px;
-      cursor: pointer;
-      transition: all 0.25s ease;
+    .stack-marquee-wrap {
       position: relative;
       overflow: hidden;
-      min-height: 64px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 28px 0;
+      mask-image: linear-gradient(90deg, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
     }
 
-    .layer::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--layer-color, var(--amber));
-      opacity: 0.6;
-      transition: opacity 0.25s ease, width 0.25s ease;
-    }
-
-    .layer:hover,
-    .layer.active {
-      background: var(--surface-2);
-      border-color: var(--layer-color, var(--amber));
-      transform: translateX(6px);
-    }
-
-    .layer:hover::before,
-    .layer.active::before {
-      opacity: 1;
-      width: 6px;
-    }
-
-    /* ---- Row 1: Icon + Name ---- */
-    .layer-top {
+    .stack-marquee-track {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 4px;
-      position: relative;
-      z-index: 1;
+      gap: 16px;
+      width: max-content;
+      animation: stack-scroll 26s linear infinite;
     }
 
-    .layer-icon {
-      width: 28px;
-      height: 28px;
+    .stack-marquee-wrap:hover .stack-marquee-track { animation-play-state: paused; }
+
+    @keyframes stack-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 999px;
+      padding: 10px 20px 10px 14px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .chip:hover { border-color: var(--chip-color, var(--amber)); transform: translateY(-2px); }
+
+    .chip-icon {
+      width: 26px;
+      height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--surface-2);
+      background: var(--surface);
       border-radius: 6px;
       border: 1px solid var(--border);
       padding: 2px;
       flex-shrink: 0;
-      color: var(--layer-color, var(--amber));
+      color: var(--chip-color, var(--amber));
     }
 
-    .layer-icon svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-      fill: currentColor;
-    }
+    .chip-icon svg { width: 16px; height: 16px; display: block; fill: currentColor; }
 
-    .layer-name {
+    .chip-name {
       font-family: 'IBM Plex Mono', monospace;
       font-weight: 600;
-      font-size: 1.02rem;
-    }
-
-    /* ---- Row 2: Running marquee ---- */
-    .layer-marquee {
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-      margin-left: 40px;
-    }
-
-    .layer-marquee-track {
-      display: flex;
+      font-size: 0.92rem;
       white-space: nowrap;
-      animation: marquee-scroll 6s linear infinite;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      gap: 40px;
     }
 
-    .layer-marquee-track span {
-      display: inline-block;
-      padding-right: 40px;
-    }
-
-    .layer-marquee-track .prompt {
-      color: var(--amber);
-    }
-
-    .layer-marquee-track .cmd-highlight {
-      color: var(--layer-color, var(--amber));
-    }
-
-    @keyframes marquee-scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* Pause on hover */
-    .layer:hover .layer-marquee-track {
-      animation-play-state: paused;
-    }
-
-    .layer-index {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      z-index: 1;
-    }
-
-    .stack-detail {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 36px;
-      min-height: 260px;
-      position: sticky;
-      top: 100px;
-    }
-
-    .stack-detail .tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--layer-color, var(--amber));
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .stack-detail h3 {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.6rem;
-      margin-bottom: 16px;
-    }
-
-    .stack-detail p {
-      color: var(--text-dim);
-    }
-
-    /* ---------- PROJECTS ---------- */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
+    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
     .project-card {
       background: var(--surface);
@@ -482,25 +333,11 @@
       margin-bottom: 14px;
     }
 
-    .project-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
+    .project-card h3 { font-size: 1.3rem; margin-bottom: 12px; font-weight: 600; }
 
-    .project-card p {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-      flex: 1;
-    }
+    .project-card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 20px; flex: 1; }
 
-    .project-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
 
     .project-tags span {
       font-family: 'IBM Plex Mono', monospace;
@@ -511,11 +348,7 @@
       border-radius: 20px;
     }
 
-    .project-links {
-      display: flex;
-      gap: 12px;
-      margin-top: 4px;
-    }
+    .project-links { display: flex; gap: 12px; margin-top: 4px; }
 
     .project-links .btn-sm {
       font-family: 'IBM Plex Mono', monospace;
@@ -537,27 +370,13 @@
       transform: translateY(-2px);
     }
 
-    .project-links .btn-sm .arrow {
-      color: var(--card-color, var(--amber));
-    }
+    .project-links .btn-sm .arrow { color: var(--card-color, var(--amber)); }
 
-    /* ---------- CONTACT ---------- */
-    .contact-section {
-      text-align: center;
-    }
+    .contact-section { text-align: center; }
 
-    .contact-section .section-title {
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      margin-bottom: 20px;
-    }
+    .contact-section .section-title { font-size: clamp(2rem, 6vw, 3.2rem); margin-bottom: 20px; }
 
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
+    .contact-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 40px; }
 
     .contact-card {
       background: var(--surface);
@@ -570,17 +389,9 @@
       min-width: 200px;
     }
 
-    .contact-card:hover {
-      border-color: var(--amber);
-      transform: translateY(-3px);
-    }
+    .contact-card:hover { border-color: var(--amber); transform: translateY(-3px); }
 
-    .contact-card .k {
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      display: block;
-      margin-bottom: 6px;
-    }
+    .contact-card .k { color: var(--text-dim); font-size: 0.75rem; display: block; margin-bottom: 6px; }
 
     footer {
       text-align: center;
@@ -592,28 +403,13 @@
     }
 
     @media (max-width: 800px) {
-      .nav-links {
-        display: none;
-      }
-      .stack-wrap {
-        grid-template-columns: 1fr;
-      }
-      .stack-detail {
-        position: static;
-      }
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
+      .nav-links { display: none; }
+      .project-grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-      html {
-        scroll-behavior: auto;
-      }
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
@@ -648,16 +444,11 @@
       <div class="section-head">
         <div class="section-tag mono">// 01 — THE STACK</div>
         <h2 class="section-title">Built layer by layer</h2>
-        <p class="section-sub">Every layer below was added on purpose, from markup to the database. Click a layer to see what it does in the stack.</p>
+        <p class="section-sub">Every technology below is part of how Shuhaib ships a full stack MERN application — from the first tag on the page to the row in the database.</p>
       </div>
 
-      <div class="stack-wrap">
-        <div class="stack-layers" id="stackLayers"></div>
-        <div class="stack-detail" id="stackDetail">
-          <span class="tag mono">SELECT A LAYER</span>
-          <h3>Hover or tap a block</h3>
-          <p>Each layer on the left is part of how Shuhaib ships a full stack MERN application — from the first tag on the page to the row in the database.</p>
-        </div>
+      <div class="stack-marquee-wrap">
+        <div class="stack-marquee-track" id="stackLayers"></div>
       </div>
     </div>
   </section>
@@ -697,99 +488,63 @@
   </footer>
 
   <script>
-    // ----- LAYERS with 2 rows: Icon+Name (top) + Running command (bottom) -----
     const layers = [{
       name: "HTML",
       color: "#E8735B",
-      cmd: "npx create-html",
       icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622H5.412l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>`
     }, {
       name: "CSS",
       color: "#F2B33D",
-      cmd: "tailwind -i style.css",
       icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>`
     }, {
       name: "JavaScript",
       color: "#8C8FE8",
-      cmd: "node server.js",
       icon: `<svg viewBox="0 0 24 24"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.402-3.346V11.03z"/></svg>`
     }, {
       name: "TypeScript",
       color: "#56C2B0",
-      cmd: "tsc --watch",
-      icon: `<svg viewBox="0 0 24 24"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.402-3.346V11.03z"/></svg>`
+      icon: `<svg viewBox="0 0 24 24"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.25 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.033.872-.098.249-.065.456-.156.623-.272a1.172 1.172 0 0 0 .481-.977.985.985 0 0 0-.148-.554c-.145-.19-.315-.352-.516-.494a4.517 4.517 0 0 0-.686-.427 21.83 21.83 0 0 0-.877-.417 8.887 8.887 0 0 1-1.166-.618 3.874 3.874 0 0 1-.86-.727 2.914 2.914 0 0 1-.526-.869 2.949 2.949 0 0 1-.185-1.065c0-.554.129-1.03.386-1.428a3.02 3.02 0 0 1 1.043-.982c.436-.259.937-.45 1.503-.573a8.13 8.13 0 0 1 1.775-.19zm-8.7.15h6.6v2.078H12.9v9.947H9.6v-9.947H6.15v-2.078z"/></svg>`
     }, {
       name: "React",
       color: "#E8735B",
-      cmd: "npm run dev",
       icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M12 2C9.8 2 8.1 3.2 7.2 5.1c-.6 1.1-.9 2.4-.9 3.9 0 1.5.3 2.8.9 3.9.9 1.9 2.6 3.1 4.8 3.1s3.9-1.2 4.8-3.1c.6-1.1.9-2.4.9-3.9 0-1.5-.3-2.8-.9-3.9C15.9 3.2 14.2 2 12 2zm0 1.5c1.4 0 2.5.8 3.2 2.1.4.8.6 1.8.6 2.9 0 1.1-.2 2.1-.6 2.9-.7 1.3-1.8 2.1-3.2 2.1s-2.5-.8-3.2-2.1c-.4-.8-.6-1.8-.6-2.9 0-1.1.2-2.1.6-2.9C9.5 4.3 10.6 3.5 12 3.5z"/><path d="M12 22c2.2 0 3.9-1.2 4.8-3.1.6-1.1.9-2.4.9-3.9 0-1.5-.3-2.8-.9-3.9-.9-1.9-2.6-3.1-4.8-3.1s-3.9 1.2-4.8 3.1c-.6 1.1-.9 2.4-.9 3.9 0 1.5.3 2.8.9 3.9C8.1 20.8 9.8 22 12 22zm0-1.5c-1.4 0-2.5-.8-3.2-2.1-.4-.8-.6-1.8-.6-2.9 0-1.1.2-2.1.6-2.9.7-1.3 1.8-2.1 3.2-2.1s2.5.8 3.2 2.1c.4.8.6 1.8.6 2.9 0 1.1-.2 2.1-.6 2.9-1.2 1.3-2.3 2.1-3.7 2.1z"/></svg>`
     }, {
       name: "Next.js",
-      color: "#F2B33D",
-      cmd: "next build",
-      icon: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>`
+      color: "#ECEFF4",
+      icon: `<svg viewBox="0 0 24 24"><path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.593-2.404-3.559a339.55 339.55 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.516-.052 3.596a.426.426 0 0 1-.206.213c-.075.038-.14.045-.495.045H7.81l-.108-.068a.44.44 0 0 1-.157-.171l-.05-.106.005-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 2 2.895 4.362a10760.433 10760.433 0 0 0 4.735 7.181l1.9 2.878.096-.063a12.318 12.318 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.6 12.6 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z"/></svg>`
     }, {
       name: "Node.js",
+      color: "#56C2B0",
+      icon: `<svg viewBox="0 0 24 24"><path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072 c-0.081-0.047-0.189-0.047-0.271,0L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235 l2.409,1.392c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253 v10.021c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.604l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082 c0.57,0.329,0.924,0.945,0.924,1.604v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078 C12.643,23.916,12.324,24,11.998,24z M19.099,13.993c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187 c0-0.528,0.235-1.233,2.258-1.233c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141 c0.071,0,0.138-0.031,0.186-0.081c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076 c-2.508,0-4.004,1.058-4.004,2.833c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269 c0,0.983-0.789,1.402-2.642,1.402c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.216-0.253-0.216h-1.137 c-0.141,0-0.253,0.112-0.253,0.253c0,1.482,0.806,3.248,4.654,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"/></svg>`
+    }, {
+      name: "MongoDB",
       color: "#8C8FE8",
-      cmd: "node index.js",
-      icon: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>`
+      icon: `<svg viewBox="0 0 24 24"><path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z"/></svg>`
+    }, {
+      name: "Express",
+      color: "#F2B33D",
+      icon: `<svg viewBox="0 0 24 24"><path d="M24 18.588a1.529 1.529 0 01-1.895-.72l-3.45-4.771-.5-.667-4.003 5.444a1.466 1.466 0 01-1.802.708l5.158-6.92-4.798-6.251a1.595 1.595 0 011.9.666l3.576 4.83 3.596-4.81a1.435 1.435 0 011.788-.668L21.708 7.9l-2.522 3.283a.666.666 0 000 .994l4.804 6.412zM.002 11.576l.42-2.075c1.154-4.103 5.858-5.81 9.094-3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 002.582-2.876c.02-.037.037-.075.038-.077 1.163.34 2.326.679 3.526.99-.006.038-.014.076-.028.113-1.007 3.216-3.235 5.148-6.626 5.417-4.283.348-8.043-2.336-8.926-6.437-.02-.088-.042-.174-.043-.263z"/></svg>`
     }, {
       name: "SQL",
-      color: "#56C2B0",
-      cmd: "psql -U postgres",
-      icon: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>`
+      color: "#E8735B",
+      icon: `<svg viewBox="0 0 24 24"><path d="M12.75 2c-2.688 0-5.13.512-6.899 1.343C4.11 4.157 3 5.373 3 6.75v10.5c0 1.377 1.11 2.593 2.851 3.407C7.62 21.488 10.062 22 12.75 22c2.688 0 5.13-.512 6.899-1.343C21.39 19.843 22.5 18.627 22.5 17.25V6.75c0-1.377-1.11-2.593-2.851-3.407C17.88 2.512 15.438 2 12.75 2Zm0 1.5c2.454 0 4.653.481 6.2 1.208 1.548.727 2.05 1.593 2.05 2.042 0 .449-.502 1.315-2.05 2.042-1.547.727-3.746 1.208-6.2 1.208-2.454 0-4.653-.481-6.2-1.208C5.002 8.065 4.5 7.199 4.5 6.75c0-.449.502-1.315 2.05-2.042C8.097 3.981 10.296 3.5 12.75 3.5Z"/></svg>`
     }];
 
     const stackEl = document.getElementById('stackLayers');
-    const detailEl = document.getElementById('stackDetail');
 
-    layers.forEach((layer, i) => {
-      const div = document.createElement('div');
-      div.className = 'layer';
-      div.style.setProperty('--layer-color', layer.color);
-      div.setAttribute('tabindex', '0');
-      div.setAttribute('role', 'button');
-
-      // Create marquee content with duplicate for seamless loop
-      const marqueeContent = `
-        <span><span class="prompt">$</span> ${layer.cmd}</span>
+    function buildChip(layer) {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.style.setProperty('--chip-color', layer.color);
+      chip.innerHTML = `
+        <span class="chip-icon">${layer.icon}</span>
+        <span class="chip-name mono">${layer.name}</span>
       `;
+      return chip;
+    }
 
-      div.innerHTML = `
-        <div class="layer-top">
-          <span class="layer-icon">${layer.icon}</span>
-          <span class="layer-name mono">${layer.name}</span>
-        </div>
-        <div class="layer-marquee">
-          <div class="layer-marquee-track">
-            ${marqueeContent}
-            ${marqueeContent}
-          </div>
-        </div>
-        <span class="layer-index mono">0${i + 1}</span>
-      `;
+    [...layers, ...layers].forEach(layer => stackEl.appendChild(buildChip(layer)));
 
-      const activate = () => {
-        document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
-        div.classList.add('active');
-        detailEl.style.setProperty('--layer-color', layer.color);
-        detailEl.innerHTML = `
-          <span class="tag mono">LAYER 0${i + 1}</span>
-          <h3>${layer.name}</h3>
-          <p>${layer.desc}</p>
-          <div style="margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:16px;">
-            <span style="color:var(--amber);">$</span> ${layer.cmd}
-          </div>
-        `;
-      };
-
-      div.addEventListener('mouseenter', activate);
-      div.addEventListener('focus', activate);
-      div.addEventListener('click', activate);
-      stackEl.appendChild(div);
-    });
-
-    // ----- PROJECTS with live buttons -----
     const projects = [{
       kicker: "COMMERCE",
       color: "#E8735B",
@@ -839,9 +594,6 @@
       `;
       gridEl.appendChild(card);
     });
-
-    // Activate first layer
-    document.querySelector('.layer')?.dispatchEvent(new Event('mouseenter'));
   </script>
 
 </body>
