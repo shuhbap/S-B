@@ -243,7 +243,7 @@
 
     .section-sub { color: var(--text-dim); max-width: 560px; margin-top: 14px; }
 
-    /* skills grid — clean cards, no emoji, only symbols */
+    /* skills grid — icon boxes matching the stack chip language */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -255,42 +255,62 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 24px 20px;
+      padding: 28px 22px;
       transition: all 0.2s ease;
-      text-align: center;
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 500;
-      font-size: 1rem;
-      letter-spacing: -0.02em;
+      text-align: left;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 14px;
     }
 
     .skill-card:hover {
-      border-color: var(--amber);
+      border-color: var(--card-color, var(--amber));
       transform: translateY(-4px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
 
-    .skill-card .skill-icon {
-      font-size: 1.8rem;
-      line-height: 1.2;
-      filter: grayscale(0.1);
-      font-weight: 300;
-      letter-spacing: 0.02em;
+    .skill-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--card-color, var(--amber));
+      transition: border-color 0.2s ease;
     }
 
-    .skill-card .skill-label {
+    .skill-card:hover .skill-icon {
+      border-color: var(--card-color, var(--amber));
+    }
+
+    .skill-icon svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .skill-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 1rem;
       color: var(--text);
+      letter-spacing: -0.01em;
     }
 
-    .skill-card .skill-sub {
+    .skill-sub {
       font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.78rem;
       color: var(--text-dim);
       font-weight: 400;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.01em;
     }
 
     .stack-marquee-wrap {
@@ -505,7 +525,7 @@
     </div>
   </section>
 
-  <!--  SKILLS SECTION — symbols only, no emoji -->
+  <!-- SKILLS SECTION — proper stroke-icons, no emoji -->
   <section class="section" id="skills">
     <div class="wrap">
       <div class="section-head">
@@ -513,14 +533,7 @@
         <h2 class="section-title">Beyond the code</h2>
         <p class="section-sub">Full stack development meets performance marketing, SMM, graphic design, video editing, and web development — a complete digital skill set.</p>
       </div>
-      <div class="skills-grid">
-        <div class="skill-card"><span class="skill-icon">⚡</span><span class="skill-label">MERN Stack</span><span class="skill-sub">MongoDB · Express · React · Node</span></div>
-        <div class="skill-card"><span class="skill-icon">📊</span><span class="skill-label">Performance Marketing</span><span class="skill-sub">Campaigns · ROI · Analytics</span></div>
-        <div class="skill-card"><span class="skill-icon">📱</span><span class="skill-label">SMM Marketing</span><span class="skill-sub">Social media strategy · growth</span></div>
-        <div class="skill-card"><span class="skill-icon">✎</span><span class="skill-label">Graphic Design</span><span class="skill-sub">Branding · UI · visual assets</span></div>
-        <div class="skill-card"><span class="skill-icon">▶</span><span class="skill-label">Video Editor</span><span class="skill-sub">Editing · motion graphics · reels</span></div>
-        <div class="skill-card"><span class="skill-icon">🌐</span><span class="skill-label">Web Developer</span><span class="skill-sub">Frontend · backend · full stack</span></div>
-      </div>
+      <div class="skills-grid" id="skillsGrid"></div>
     </div>
   </section>
 
@@ -615,6 +628,54 @@
     }
 
     [...layers, ...layers].forEach(layer => stackEl.appendChild(buildChip(layer)));
+
+    // ── Skills: real stroke-icons (feather-style), consistent with the stack section's visual language
+    const skills = [{
+      label: "MERN Stack",
+      sub: "MongoDB · Express · React · Node",
+      color: "#E8735B",
+      icon: `<svg viewBox="0 0 24 24"><path d="M12 3l9 4.5-9 4.5-9-4.5L12 3z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5l9 4.5 9-4.5"/></svg>`
+    }, {
+      label: "Performance Marketing",
+      sub: "Campaigns · ROI · analytics",
+      color: "#F2B33D",
+      icon: `<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-6M21 7v6"/></svg>`
+    }, {
+      label: "SMM Marketing",
+      sub: "Social strategy · growth",
+      color: "#8C8FE8",
+      icon: `<svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg>`
+    }, {
+      label: "Graphic Design",
+      sub: "Branding · UI · visual assets",
+      color: "#56C2B0",
+      icon: `<svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`
+    }, {
+      label: "Video Editor",
+      sub: "Editing · motion · reels",
+      color: "#E8735B",
+      icon: `<svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="14" height="13" rx="2"/><path d="M16.5 9.5l5-3v11l-5-3z"/></svg>`
+    }, {
+      label: "Web Developer",
+      sub: "Frontend · backend · full stack",
+      color: "#F2B33D",
+      icon: `<svg viewBox="0 0 24 24"><polyline points="9 8 5 12 9 16"/><polyline points="15 8 19 12 15 16"/><line x1="13" y1="5" x2="11" y2="19"/></svg>`
+    }];
+
+    const skillsGridEl = document.getElementById('skillsGrid');
+    skills.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'skill-card';
+      card.style.setProperty('--card-color', s.color);
+      card.innerHTML = `
+        <span class="skill-icon">${s.icon}</span>
+        <div>
+          <div class="skill-label">${s.label}</div>
+          <div class="skill-sub">${s.sub}</div>
+        </div>
+      `;
+      skillsGridEl.appendChild(card);
+    });
 
     const projects = [{
       kicker: "COMMERCE",
