@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shuhaib AP · Full Stack MERN</title>
+  <meta name="description" content="Shuhaib AP — Full stack MERN developer building web apps, plus performance marketing, SMM, graphic design and video editing." />
   <!-- Favicon: stylish "SB" monogram -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23141F3B'/%3E%3Ctext x='50' y='68' font-family='Georgia, serif' font-size='46' font-weight='700' fill='%23F2B33D' text-anchor='middle' letter-spacing='-2'%3ESB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,6 +75,7 @@
       align-items: center;
       justify-content: space-between;
       height: 72px;
+      position: relative;
     }
 
     .logo {
@@ -109,6 +111,73 @@
       color: var(--amber);
     }
 
+    /* ── Mobile nav toggle ── */
+    .nav-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 110;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      padding: 12px 32px 24px;
+      z-index: 99;
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    .mobile-menu a::before {
+      content: "./";
+      color: var(--amber);
+    }
+
     .hero {
       min-height: 100vh;
       display: flex;
@@ -128,6 +197,52 @@
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent);
       pointer-events: none;
+    }
+
+    .hero .wrap {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      justify-content: space-between;
+    }
+
+    .hero-copy { flex: 1; min-width: 0; }
+
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      width: 220px;
+      height: 220px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-photo-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      box-shadow: inset 0 0 0 1px rgba(242, 179, 61, 0.15);
+    }
+
+    .hero-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-photo-fallback {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 20px;
     }
 
     .eyebrow {
@@ -242,6 +357,50 @@
     }
 
     .section-sub { color: var(--text-dim); max-width: 560px; margin-top: 14px; }
+
+    /* ── About section ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .about-body p {
+      color: var(--text-dim);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .about-body strong { color: var(--text); font-weight: 500; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+    }
+
+    .stat-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-family: 'IBM Plex Mono', monospace;
+    }
 
     /* skills grid — icon boxes matching the stack chip language */
     .skills-grid {
@@ -446,7 +605,9 @@
 
     .contact-section .section-title { font-size: clamp(2rem, 6vw, 3.2rem); margin-bottom: 20px; }
 
-    .contact-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 40px; }
+    .contact-cta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 36px; }
+
+    .contact-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 28px; }
 
     .contact-card {
       background: var(--surface);
@@ -474,8 +635,13 @@
 
     @media (max-width: 800px) {
       .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .mobile-menu { display: flex; }
       .project-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero .wrap { flex-direction: column-reverse; text-align: left; gap: 32px; }
+      .hero-photo-wrap { width: 140px; height: 140px; }
+      .about-grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -490,25 +656,80 @@
     <nav class="wrap">
       <div class="logo">shuhaib<span>.ap</span></div>
       <div class="nav-links">
+        <a href="#about">about</a>
         <a href="#stack">stack</a>
         <a href="#skills">skills</a>
         <a href="#projects">projects</a>
         <a href="#contact">contact</a>
       </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about">about</a>
+      <a href="#stack">stack</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </div>
   </header>
 
   <section class="hero">
     <div class="wrap">
-      <div class="eyebrow mono">AVAILABLE FOR WORK</div>
-      <h1 class="name">Shuhaib <span class="accent">AP</span></h1>
-      <p class="role">Full stack <strong>MERN developer</strong> — building web apps from the database up, one layer at a time.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View projects</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      <div class="hero-copy">
+        <div class="eyebrow mono">AVAILABLE FOR WORK</div>
+        <h1 class="name">Shuhaib <span class="accent">AP</span></h1>
+        <p class="role">Full stack <strong>MERN developer</strong> — building web apps from the database up, one layer at a time.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View projects</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <!-- Replace src below with your actual photo -->
+        <img src="profile.jpg" alt="Shuhaib AP" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="hero-photo-fallback" style="display:none; align-items:center; justify-content:center; flex-direction:column;">
+          Add profile.jpg<br>next to this file
+        </div>
       </div>
     </div>
     <div class="scroll-cue"><div class="line"></div>scroll</div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-tag mono">// 00 — ABOUT</div>
+        <h2 class="section-title">Who's building this</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-body">
+          <p>I'm <strong>Shuhaib AP</strong>, a full stack MERN developer who likes owning a project from the database schema to the pixel on screen. I care about code that's easy to read six months later, and interfaces that don't make people think twice.</p>
+          <p>Outside pure development, I work across <strong>performance marketing, social media growth, graphic design, and video editing</strong> — which means I usually understand not just how to build a product, but how it needs to look and perform once it's live.</p>
+          <p>Currently open to freelance work, full-time roles, and collaborations of any size.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num mono">4+</div>
+            <div class="stat-label mono">PROJECTS SHIPPED</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num mono">MERN</div>
+            <div class="stat-label mono">CORE STACK</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num mono">6</div>
+            <div class="stat-label mono">SKILL AREAS</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num mono">100%</div>
+            <div class="stat-label mono">END-TO-END</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="section" id="stack">
@@ -531,7 +752,7 @@
       <div class="section-head">
         <div class="section-tag mono">// 01.5 — EXPERTISE</div>
         <h2 class="section-title">Beyond the code</h2>
-        <p class="section-sub">Full stack development meets performance marketing, SMM, graphic design, video editing, and web development — a complete digital skill set.</p>
+        <p class="section-sub">Full stack development meets performance marketing, SMM, graphic design, and video editing — a complete digital skill set.</p>
       </div>
       <div class="skills-grid" id="skillsGrid"></div>
     </div>
@@ -553,6 +774,11 @@
       <div class="section-tag mono">// 03 — CONTACT</div>
       <h2 class="section-title">Let's build something.</h2>
       <p class="section-sub" style="margin-left:auto;margin-right:auto;">Open to freelance work, full-time roles, and anything in between the front end and the database.</p>
+      <div class="contact-cta">
+        <!-- Replace resume.pdf with your actual resume file path -->
+        <a href="resume.pdf" download class="btn btn-primary">Download Resume</a>
+        <a href="mailto:shuhaiiibap@gmail.com" class="btn btn-ghost">Say hello</a>
+      </div>
       <div class="contact-links">
         <a class="contact-card" href="mailto:shuhaiiibap@gmail.com">
           <span class="k">EMAIL</span>shuhaiiibap@gmail.com
@@ -572,6 +798,24 @@
   </footer>
 
   <script>
+    // ── Mobile menu toggle ──
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
     const layers = [{
       name: "HTML",
       color: "#E8735B",
@@ -630,12 +874,8 @@
     [...layers, ...layers].forEach(layer => stackEl.appendChild(buildChip(layer)));
 
     // ── Skills: real stroke-icons (feather-style), consistent with the stack section's visual language
+    // "MERN Stack" card removed — already covered by the Stack section above.
     const skills = [{
-      label: "MERN Stack",
-      sub: "MongoDB · Express · React · Node",
-      color: "#E8735B",
-      icon: `<svg viewBox="0 0 24 24"><path d="M12 3l9 4.5-9 4.5-9-4.5L12 3z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5l9 4.5 9-4.5"/></svg>`
-    }, {
       label: "Performance Marketing",
       sub: "Campaigns · ROI · analytics",
       color: "#F2B33D",
@@ -728,4 +968,4 @@
     });
   </script>
 </body>
-</html>
+    </html>
