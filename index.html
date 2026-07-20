@@ -5,18 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shuhaib AP · Full Stack MERN</title>
   <meta name="description" content="Shuhaib AP — Full stack MERN developer building web apps, plus performance marketing, SMM, graphic design and video editing." />
-  <!-- Favicon: stylish "SB" monogram -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23141F3B'/%3E%3Ctext x='50' y='68' font-family='Georgia, serif' font-size='46' font-weight='700' fill='%23F2B33D' text-anchor='middle' letter-spacing='-2'%3ESB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #0B1220;
       --bg-alt: #0F1830;
@@ -30,7 +24,6 @@
       --coral: #E8735B;
       --violet: #8C8FE8;
     }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -38,602 +31,286 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-
-    ::selection {
-      background: var(--amber);
-      color: var(--bg);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .mono {
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
+    ::selection { background: var(--amber); color: var(--bg); }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
 
     header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(11, 18, 32, 0.85);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
-
     nav.wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-      position: relative;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; position: relative;
     }
-
     .logo {
       font-family: 'IBM Plex Mono', monospace;
-      font-weight: 600;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
+      font-weight: 600; font-size: 1.05rem; letter-spacing: -0.02em;
     }
-
-    .logo span {
-      color: var(--amber);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-    }
-
+    .logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 36px; }
     .nav-links a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      transition: color 0.2s ease;
-      position: relative;
+      font-size: 0.85rem; color: var(--text-dim);
+      transition: color 0.2s ease; position: relative;
     }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-links a::before {
-      content: "./";
-      color: var(--amber);
-    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a::before { content: "./"; color: var(--amber); }
 
     .nav-toggle {
-      display: none;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface);
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 5px;
-      z-index: 110;
+      display: none; width: 40px; height: 40px;
+      border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface); cursor: pointer;
+      align-items: center; justify-content: center; flex-direction: column;
+      gap: 5px; z-index: 110;
     }
-
     .nav-toggle span {
-      display: block;
-      width: 18px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
+      display: block; width: 18px; height: 2px;
+      background: var(--text); border-radius: 2px;
       transition: transform 0.25s ease, opacity 0.25s ease;
     }
-
     .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
     .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 72px;
-      left: 0;
-      right: 0;
-      background: var(--bg-alt);
-      border-bottom: 1px solid var(--border);
-      flex-direction: column;
-      padding: 12px 32px 24px;
-      z-index: 99;
-      transform: translateY(-8px);
-      opacity: 0;
-      pointer-events: none;
+      display: none; position: fixed; top: 72px; left: 0; right: 0;
+      background: var(--bg-alt); border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 12px 32px 24px; z-index: 99;
+      transform: translateY(-8px); opacity: 0; pointer-events: none;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
-
-    .mobile-menu.open {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
+    .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
     .mobile-menu a {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      padding: 14px 0;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem;
+      color: var(--text-dim); padding: 14px 0;
       border-bottom: 1px solid var(--border);
     }
-
     .mobile-menu a:last-child { border-bottom: none; }
-
-    .mobile-menu a::before {
-      content: "./";
-      color: var(--amber);
-    }
+    .mobile-menu a::before { content: "./"; color: var(--amber); }
 
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 72px;
-      position: relative;
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding-top: 72px; position: relative;
     }
-
     .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      content: ""; position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent);
       pointer-events: none;
     }
-
-    .hero .wrap {
-      display: flex;
-      align-items: center;
-      gap: 56px;
-      justify-content: space-between;
-    }
-
+    .hero .wrap { display: flex; align-items: center; gap: 56px; justify-content: space-between; }
     .hero-copy { flex: 1; min-width: 0; }
 
     .hero-photo-wrap {
-      flex-shrink: 0;
-      width: 220px;
-      height: 220px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-shrink: 0; width: 220px; height: 220px;
+      border-radius: 20px; border: 1px solid var(--border);
+      background: var(--surface); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
       position: relative;
     }
-
     .hero-photo-wrap::after {
-      content: "";
-      position: absolute;
-      inset: 0;
+      content: ""; position: absolute; inset: 0;
       border-radius: 20px;
-      box-shadow: inset 0 0 0 1px rgba(242, 179, 61, 0.15);
+      box-shadow: inset 0 0 0 1px rgba(242,179,61,0.15);
     }
-
-    .hero-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
+    .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .hero-photo-fallback {
-      font-family: 'IBM Plex Mono', monospace;
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      text-align: center;
-      padding: 20px;
+      font-family: 'IBM Plex Mono', monospace; color: var(--text-dim);
+      font-size: 0.75rem; text-align: center; padding: 20px;
     }
 
     .eyebrow {
-      font-family: 'IBM Plex Mono', monospace;
-      color: var(--teal);
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-family: 'IBM Plex Mono', monospace; color: var(--teal);
+      font-size: 0.85rem; letter-spacing: 0.08em; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
     }
-
     .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+      content: ""; width: 8px; height: 8px; border-radius: 50%;
       background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(86, 194, 176, 0.15);
+      box-shadow: 0 0 0 4px rgba(86,194,176,0.15);
       animation: pulse 2s ease-in-out infinite;
     }
-
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(86, 194, 176, 0.15); }
-      50% { box-shadow: 0 0 0 8px rgba(86, 194, 176, 0.05); }
+      0%,100% { box-shadow: 0 0 0 4px rgba(86,194,176,0.15); }
+      50% { box-shadow: 0 0 0 8px rgba(86,194,176,0.05); }
     }
 
     h1.name {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 700;
-      font-size: clamp(2.6rem, 7vw, 5rem);
-      letter-spacing: -0.03em;
-      line-height: 1.02;
-      margin-bottom: 22px;
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: -0.03em;
+      line-height: 1.02; margin-bottom: 22px;
     }
-
     h1.name .accent { color: var(--amber); }
-
     .role {
-      font-size: clamp(1.1rem, 2.4vw, 1.5rem);
-      color: var(--text-dim);
-      max-width: 600px;
-      margin-bottom: 36px;
-      font-weight: 400;
+      font-size: clamp(1.1rem, 2.4vw, 1.5rem); color: var(--text-dim);
+      max-width: 600px; margin-bottom: 36px; font-weight: 400;
     }
-
     .role strong { color: var(--text); font-weight: 500; }
-
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
     .btn {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.9rem;
-      padding: 14px 26px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem;
+      padding: 14px 26px; border-radius: 6px; border: 1px solid var(--border);
+      transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;
     }
-
     .btn-primary {
-      background: var(--amber);
-      color: #0B1220;
-      border-color: var(--amber);
+      background: var(--amber); color: #0B1220; border-color: var(--amber);
       font-weight: 600;
     }
-
     .btn-primary:hover { background: #ffc35c; transform: translateY(-2px); }
-
     .btn-ghost { color: var(--text); }
-
     .btn-ghost:hover { border-color: var(--text-dim); background: var(--surface); }
 
     .scroll-cue {
-      position: absolute;
-      bottom: 40px;
-      left: 32px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      position: absolute; bottom: 40px; left: 32px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem;
+      color: var(--text-dim); display: flex; align-items: center; gap: 8px;
     }
-
-    .scroll-cue .line {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(var(--text-dim), transparent);
-    }
+    .scroll-cue .line { width: 1px; height: 36px; background: linear-gradient(var(--text-dim), transparent); }
 
     .section { padding: 120px 0; border-top: 1px solid var(--border); }
-
     .section-head { margin-bottom: 56px; }
-
     .section-tag {
-      font-family: 'IBM Plex Mono', monospace;
-      color: var(--amber);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
+      font-family: 'IBM Plex Mono', monospace; color: var(--amber);
+      font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 12px;
     }
-
     .section-title {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 600;
+      font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 600;
       letter-spacing: -0.02em;
     }
-
     .section-sub { color: var(--text-dim); max-width: 560px; margin-top: 14px; }
 
     .about-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 48px;
-      align-items: start;
+      display: grid; grid-template-columns: 1.3fr 1fr;
+      gap: 48px; align-items: start;
     }
-
-    .about-body p {
-      color: var(--text-dim);
-      margin-bottom: 16px;
-      font-size: 1rem;
-    }
-
+    .about-body p { color: var(--text-dim); margin-bottom: 16px; font-size: 1rem; }
     .about-body strong { color: var(--text); font-weight: 500; }
-
     .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
-
     .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px 20px;
     }
-
     .stat-num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.9rem;
-      font-weight: 700;
-      color: var(--amber);
-      line-height: 1;
-      margin-bottom: 8px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 1.9rem;
+      font-weight: 700; color: var(--amber); line-height: 1; margin-bottom: 8px;
     }
-
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      font-family: 'IBM Plex Mono', monospace;
-    }
+    .stat-label { font-size: 0.8rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; }
 
     .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
-      margin-top: 12px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px; margin-top: 12px;
     }
-
     .skill-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 22px;
-      transition: all 0.2s ease;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px 22px; transition: all 0.2s ease;
+      text-align: left; display: flex; flex-direction: column; gap: 14px;
     }
-
-    .skill-card:hover {
-      border-color: var(--card-color, var(--amber));
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-
+    .skill-card:hover { border-color: var(--card-color, var(--amber)); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
     .skill-icon {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--card-color, var(--amber));
-      transition: border-color 0.2s ease;
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--card-color, var(--amber)); transition: border-color 0.2s ease;
     }
-
-    .skill-card:hover .skill-icon {
-      border-color: var(--card-color, var(--amber));
-    }
-
-    .skill-icon svg {
-      width: 22px;
-      height: 22px;
-      display: block;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .skill-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    .skill-sub {
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      font-weight: 400;
-      letter-spacing: 0.01em;
-    }
+    .skill-card:hover .skill-icon { border-color: var(--card-color, var(--amber)); }
+    .skill-icon svg { width: 22px; height: 22px; display: block; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .skill-label { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 1rem; color: var(--text); letter-spacing: -0.01em; }
+    .skill-sub { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; color: var(--text-dim); font-weight: 400; }
 
     .stack-marquee-wrap {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface);
-      padding: 28px 0;
+      position: relative; overflow: hidden; border: 1px solid var(--border);
+      border-radius: 12px; background: var(--surface); padding: 28px 0;
       mask-image: linear-gradient(90deg, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
       -webkit-mask-image: linear-gradient(90deg, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
     }
-
     .stack-marquee-track {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      width: max-content;
+      display: flex; align-items: center; gap: 16px; width: max-content;
       animation: stack-scroll 26s linear infinite;
     }
-
     .stack-marquee-wrap:hover .stack-marquee-track { animation-play-state: paused; }
-
     @keyframes stack-scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-
     .chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      border-radius: 999px;
-      padding: 10px 20px 10px 14px;
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      border: 1px solid var(--border); background: var(--surface-2);
+      border-radius: 999px; padding: 10px 20px 10px 14px;
       transition: border-color 0.2s ease, transform 0.2s ease;
     }
-
     .chip:hover { border-color: var(--chip-color, var(--amber)); transform: translateY(-2px); }
-
     .chip-icon {
-      width: 26px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--surface);
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      padding: 2px;
-      flex-shrink: 0;
-      color: var(--chip-color, var(--amber));
+      width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+      background: var(--surface); border-radius: 6px; border: 1px solid var(--border);
+      padding: 2px; flex-shrink: 0; color: var(--chip-color, var(--amber));
     }
-
     .chip-icon svg { width: 16px; height: 16px; display: block; fill: currentColor; }
-
-    .chip-name {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 600;
-      font-size: 0.92rem;
-      white-space: nowrap;
-    }
+    .chip-name { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 0.92rem; white-space: nowrap; }
 
     .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
     .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      transition: all 0.25s ease;
-      position: relative;
-      display: flex;
-      flex-direction: column;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 32px; transition: all 0.25s ease;
+      position: relative; display: flex; flex-direction: column;
     }
-
-    .project-card:hover {
-      border-color: var(--card-color, var(--amber));
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .project-kicker {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--card-color, var(--amber));
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
-    }
-
+    .project-card:hover { border-color: var(--card-color, var(--amber)); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+    .project-kicker { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--card-color, var(--amber)); letter-spacing: 0.08em; margin-bottom: 14px; }
     .project-card h3 { font-size: 1.3rem; margin-bottom: 12px; font-weight: 600; }
-
     .project-card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 20px; flex: 1; }
-
     .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
-
-    .project-tags span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
+    .project-tags span { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-dim); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; }
     .project-links { display: flex; gap: 12px; margin-top: 4px; flex-wrap: wrap; }
-
     .project-links .btn-sm {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      padding: 8px 16px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text);
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem;
+      padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--text); transition: all 0.2s ease;
+      display: inline-flex; align-items: center; gap: 6px;
     }
-
-    .project-links .btn-sm:hover {
-      border-color: var(--card-color, var(--amber));
-      background: var(--surface);
-      transform: translateY(-2px);
-    }
-
+    .project-links .btn-sm:hover { border-color: var(--card-color, var(--amber)); background: var(--surface); transform: translateY(-2px); }
     .project-links .btn-sm .arrow { color: var(--card-color, var(--amber)); }
 
     .contact-section { text-align: center; }
-
     .contact-section .section-title { font-size: clamp(2rem, 6vw, 3.2rem); margin-bottom: 20px; }
-
     .contact-cta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 36px; }
 
-    .contact-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 28px; }
-
-    .contact-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 28px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-      min-width: 200px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    /* ── Social icons only, no box ── */
+    .social-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 28px; flex-wrap: wrap; margin-top: 32px;
     }
-
-    .contact-card:hover { border-color: var(--amber); transform: translateY(-3px); }
-
-    .contact-card .k { color: var(--text-dim); font-size: 0.75rem; display: block; margin-bottom: 6px; }
-    .contact-card .icon { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .contact-card .icon svg { width: 18px; height: 18px; fill: none; stroke: var(--amber); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .contact-card .label { display: flex; flex-direction: column; align-items: flex-start; }
+    .social-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 12px;
+      color: var(--text-dim); transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+    .social-link:hover {
+      color: var(--text); border-color: var(--amber);
+      transform: translateY(-4px); background: var(--surface);
+    }
+    .social-link svg {
+      width: 28px; height: 28px; fill: none; stroke: currentColor;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      transition: stroke 0.2s ease;
+    }
+    .social-link:hover svg { stroke: var(--amber); }
+    .social-link .fill { fill: currentColor; stroke: none; }
+    .social-link:hover .fill { fill: var(--amber); }
 
     footer {
-      text-align: center;
-      padding: 40px 0;
-      color: var(--text-dim);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border);
+      text-align: center; padding: 40px 0;
+      color: var(--text-dim); font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem; border-top: 1px solid var(--border);
     }
 
     @media (max-width: 800px) {
@@ -645,10 +322,10 @@
       .hero .wrap { flex-direction: column-reverse; text-align: left; gap: 32px; }
       .hero-photo-wrap { width: 140px; height: 140px; }
       .about-grid { grid-template-columns: 1fr; }
-      .contact-links { flex-direction: column; align-items: center; }
-      .contact-card { min-width: unset; width: 100%; max-width: 320px; }
+      .social-row { gap: 18px; }
+      .social-link { width: 42px; height: 42px; }
+      .social-link svg { width: 24px; height: 24px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
       html { scroll-behavior: auto; }
@@ -657,332 +334,226 @@
 </head>
 <body>
 
-  <header>
-    <nav class="wrap">
-      <div class="logo">shuhaib<span>.ap</span></div>
-      <div class="nav-links">
-        <a href="#about">about</a>
-        <a href="#stack">stack</a>
-        <a href="#skills">skills</a>
-        <a href="#projects">projects</a>
-        <a href="#contact">contact</a>
-      </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-    <div class="mobile-menu" id="mobileMenu">
+<header>
+  <nav class="wrap">
+    <div class="logo">shuhaib<span>.ap</span></div>
+    <div class="nav-links">
       <a href="#about">about</a>
       <a href="#stack">stack</a>
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
     </div>
-  </header>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">about</a>
+    <a href="#stack">stack</a>
+    <a href="#skills">skills</a>
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
+  </div>
+</header>
 
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-copy">
-        <div class="eyebrow mono">AVAILABLE FOR WORK</div>
-        <h1 class="name">Shuhaib <span class="accent">AP</span></h1>
-        <p class="role">Full stack <strong>MERN developer</strong> — building web apps from the database up, one layer at a time.</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">View projects</a>
-          <a href="#contact" class="btn btn-ghost">Get in touch</a>
-        </div>
-      </div>
-      <div class="hero-photo-wrap">
-        <img src="profile.jpg" alt="Shuhaib AP" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-        <div class="hero-photo-fallback" style="display:none; align-items:center; justify-content:center; flex-direction:column;">
-          Add profile.jpg<br>next to this file
-        </div>
-      </div>
-    </div>
-    <div class="scroll-cue"><div class="line"></div>scroll</div>
-  </section>
-
-  <!-- ABOUT SECTION -->
-  <section class="section" id="about">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-tag mono">// 00 — ABOUT</div>
-        <h2 class="section-title">Who's building this</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-body">
-          <p>I'm <strong>Shuhaib AP</strong>, a full stack MERN developer who likes owning a project from the database schema to the pixel on screen. I care about code that's easy to read six months later, and interfaces that don't make people think twice.</p>
-          <p>Outside pure development, I work across <strong>performance marketing, social media growth, graphic design, and video editing</strong> — which means I usually understand not just how to build a product, but how it needs to look and perform once it's live.</p>
-          <p>Currently open to freelance work, full-time roles, and collaborations of any size.</p>
-        </div>
-        <div class="about-stats">
-          <div class="stat-card">
-            <div class="stat-num mono">4+</div>
-            <div class="stat-label mono">PROJECTS SHIPPED</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num mono">MERN</div>
-            <div class="stat-label mono">CORE STACK</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num mono">6</div>
-            <div class="stat-label mono">SKILL AREAS</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num mono">100%</div>
-            <div class="stat-label mono">END-TO-END</div>
-          </div>
-        </div>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow mono">AVAILABLE FOR WORK</div>
+      <h1 class="name">Shuhaib <span class="accent">AP</span></h1>
+      <p class="role">Full stack <strong>MERN developer</strong> — building web apps from the database up, one layer at a time.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
     </div>
-  </section>
-
-  <section class="section" id="stack">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-tag mono">// 01 — THE STACK</div>
-        <h2 class="section-title">Built layer by layer</h2>
-        <p class="section-sub">Every technology below is part of how Shuhaib ships a full stack MERN application — from the first tag on the page to the row in the database.</p>
-      </div>
-
-      <div class="stack-marquee-wrap">
-        <div class="stack-marquee-track" id="stackLayers"></div>
+    <div class="hero-photo-wrap">
+      <img src="profile.jpg" alt="Shuhaib AP" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+      <div class="hero-photo-fallback" style="display:none; align-items:center; justify-content:center; flex-direction:column;">
+        Add profile.jpg<br>next to this file
       </div>
     </div>
-  </section>
+  </div>
+  <div class="scroll-cue"><div class="line"></div>scroll</div>
+</section>
 
-  <!-- SKILLS SECTION -->
-  <section class="section" id="skills">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-tag mono">// 01.5 — EXPERTISE</div>
-        <h2 class="section-title">Beyond the code</h2>
-        <p class="section-sub">Full stack development meets performance marketing, SMM, graphic design, and video editing — a complete digital skill set.</p>
-      </div>
-      <div class="skills-grid" id="skillsGrid"></div>
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag mono">// 00 — ABOUT</div>
+      <h2 class="section-title">Who's building this</h2>
     </div>
-  </section>
-
-  <section class="section" id="projects">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-tag mono">// 02 — WORK</div>
-        <h2 class="section-title">Selected projects</h2>
-        <p class="section-sub">Four builds, four different problems — commerce, brand presence, automation, and a one-day-only event site.</p>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>I'm <strong>Shuhaib AP</strong>, a full stack MERN developer who likes owning a project from the database schema to the pixel on screen. I care about code that's easy to read six months later, and interfaces that don't make people think twice.</p>
+        <p>Outside pure development, I work across <strong>performance marketing, social media growth, graphic design, and video editing</strong> — which means I usually understand not just how to build a product, but how it needs to look and perform once it's live.</p>
+        <p>Currently open to freelance work, full-time roles, and collaborations of any size.</p>
       </div>
-      <div class="project-grid" id="projectGrid"></div>
-    </div>
-  </section>
-
-  <section class="section contact-section" id="contact">
-    <div class="wrap">
-      <div class="section-tag mono">// 03 — CONTACT</div>
-      <h2 class="section-title">Let's build something.</h2>
-      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Open to freelance work, full-time roles, and anything in between the front end and the database.</p>
-      <div class="contact-cta">
-        <a href="resume.pdf" download class="btn btn-primary">Download Resume</a>
-        <a href="mailto:shuhaiiibap@gmail.com" class="btn btn-ghost">Say hello</a>
-      </div>
-      <div class="contact-links">
-        <a class="contact-card" href="mailto:shuhaiiibap@gmail.com">
-          <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-          <span class="label">shuhaiiibap@gmail.com</span>
-        </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/shuhabap" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
-          <span class="label">/in/shuhabap</span>
-        </a>
-        <a class="contact-card" href="https://github.com/shuhbap" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.446-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.376.203 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></span>
-          <span class="label">@shuhbap</span>
-        </a>
-        <a class="contact-card" href="https://www.instagram.com/shuhaiiib.ap" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></span>
-          <span class="label">@shuhaiiib.ap</span>
-        </a>
-        <a class="contact-card" href="https://twitter.com/Shuhaiiibap" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
-          <span class="label">@Shuhaiiibap</span>
-        </a>
-        <a class="contact-card" href="https://wa.me/917448520075" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M15.5 12.5c-.3-.2-1.7-1-2.1-.8-.4.2-.7.8-.9 1-.2.2-.4.2-.6.1-.4-.2-1.1-.7-1.5-1.2-.3-.4-.6-.9-.6-1.2 0-.2 0-.3.2-.5.1-.1.2-.3.2-.5.1-.2.1-.4 0-.5-.2-.4-1.1-1.4-1.4-1.7-.3-.4-.7-.3-.9-.3H8.8c-.3 0-.6.1-.8.4-.3.3-.8.7-.9 1.1-.2.5-.2.9-.1 1.4.3 1.2 1.2 2.8 2.5 3.8 1.4 1.1 2.8 1.7 3.8 1.8.5.1 1.1-.1 1.5-.4.3-.2.6-.5.6-.8.1-.3-.1-.6-.3-.7z"/></svg></span>
-          <span class="label">+91 74485 20075</span>
-        </a>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num mono">4+</div><div class="stat-label mono">PROJECTS SHIPPED</div></div>
+        <div class="stat-card"><div class="stat-num mono">MERN</div><div class="stat-label mono">CORE STACK</div></div>
+        <div class="stat-card"><div class="stat-num mono">6</div><div class="stat-label mono">SKILL AREAS</div></div>
+        <div class="stat-card"><div class="stat-num mono">100%</div><div class="stat-label mono">END-TO-END</div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <div class="wrap">Designed &amp; built by Shuhaib AP — HTML to SQL, no layer skipped.</div>
-  </footer>
+<section class="section" id="stack">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag mono">// 01 — THE STACK</div>
+      <h2 class="section-title">Built layer by layer</h2>
+      <p class="section-sub">Every technology below is part of how Shuhaib ships a full stack MERN application — from the first tag on the page to the row in the database.</p>
+    </div>
+    <div class="stack-marquee-wrap">
+      <div class="stack-marquee-track" id="stackLayers"></div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // ── Mobile menu toggle ──
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag mono">// 01.5 — EXPERTISE</div>
+      <h2 class="section-title">Beyond the code</h2>
+      <p class="section-sub">Full stack development meets performance marketing, SMM, graphic design, and video editing — a complete digital skill set.</p>
+    </div>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </div>
+</section>
 
-    navToggle.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      navToggle.classList.toggle('open', isOpen);
-      navToggle.setAttribute('aria-expanded', isOpen);
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag mono">// 02 — WORK</div>
+      <h2 class="section-title">Selected projects</h2>
+      <p class="section-sub">Four builds, four different problems — commerce, brand presence, automation, and a one-day-only event site.</p>
+    </div>
+    <div class="project-grid" id="projectGrid"></div>
+  </div>
+</section>
+
+<section class="section contact-section" id="contact">
+  <div class="wrap">
+    <div class="section-tag mono">// 03 — CONTACT</div>
+    <h2 class="section-title">Let's build something.</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">Open to freelance work, full-time roles, and anything in between the front end and the database.</p>
+    <div class="contact-cta">
+      <a href="resume.pdf" download class="btn btn-primary">Download Resume</a>
+      <a href="mailto:shuhaiiibap@gmail.com" class="btn btn-ghost">Say hello</a>
+    </div>
+
+    <!-- ── SOCIAL ICONS ONLY, NO BOX ── -->
+    <div class="social-row">
+      <a href="mailto:shuhaiiibap@gmail.com" class="social-link" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/shuhabap" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/shuhbap" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.446-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.376.203 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/shuhaiiib.ap" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+      </a>
+      <a href="https://twitter.com/Shuhaiiibap" target="_blank" rel="noopener" class="social-link" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://wa.me/917448520075" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M15.5 12.5c-.3-.2-1.7-1-2.1-.8-.4.2-.7.8-.9 1-.2.2-.4.2-.6.1-.4-.2-1.1-.7-1.5-1.2-.3-.4-.6-.9-.6-1.2 0-.2 0-.3.2-.5.1-.1.2-.3.2-.5.1-.2.1-.4 0-.5-.2-.4-1.1-1.4-1.4-1.7-.3-.4-.7-.3-.9-.3H8.8c-.3 0-.6.1-.8.4-.3.3-.8.7-.9 1.1-.2.5-.2.9-.1 1.4.3 1.2 1.2 2.8 2.5 3.8 1.4 1.1 2.8 1.7 3.8 1.8.5.1 1.1-.1 1.5-.4.3-.2.6-.5.6-.8.1-.3-.1-.6-.3-.7z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Designed &amp; built by Shuhaib AP — HTML to SQL, no layer skipped.</div>
+</footer>
+
+<script>
+  // ── Mobile menu toggle ──
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
+  });
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        navToggle.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
+  // ── Stack layers ──
+  const layers = [
+    { name: "HTML", color: "#E8735B", icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622H5.412l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>` },
+    { name: "CSS", color: "#F2B33D", icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>` },
+    { name: "JavaScript", color: "#8C8FE8", icon: `<svg viewBox="0 0 24 24"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.402-3.346V11.03z"/></svg>` },
+    { name: "TypeScript", color: "#56C2B0", icon: `<svg viewBox="0 0 24 24"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.25 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.033.872-.098.249-.065.456-.156.623-.272a1.172 1.172 0 0 0 .481-.977.985.985 0 0 0-.148-.554c-.145-.19-.315-.352-.516-.494a4.517 4.517 0 0 0-.686-.427 21.83 21.83 0 0 0-.877-.417 8.887 8.887 0 0 1-1.166-.618 3.874 3.874 0 0 1-.86-.727 2.914 2.914 0 0 1-.526-.869 2.949 2.949 0 0 1-.185-1.065c0-.554.129-1.03.386-1.428a3.02 3.02 0 0 1 1.043-.982c.436-.259.937-.45 1.503-.573a8.13 8.13 0 0 1 1.775-.19zm-8.7.15h6.6v2.078H12.9v9.947H9.6v-9.947H6.15v-2.078z"/></svg>` },
+    { name: "React", color: "#E8735B", icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M12 2C9.8 2 8.1 3.2 7.2 5.1c-.6 1.1-.9 2.4-.9 3.9 0 1.5.3 2.8.9 3.9.9 1.9 2.6 3.1 4.8 3.1s3.9-1.2 4.8-3.1c.6-1.1.9-2.4.9-3.9 0-1.5-.3-2.8-.9-3.9C15.9 3.2 14.2 2 12 2zm0 1.5c1.4 0 2.5.8 3.2 2.1.4.8.6 1.8.6 2.9 0 1.1-.2 2.1-.6 2.9-.7 1.3-1.8 2.1-3.2 2.1s-2.5-.8-3.2-2.1c-.4-.8-.6-1.8-.6-2.9 0-1.1.2-2.1.6-2.9C9.5 4.3 10.6 3.5 12 3.5z"/><path d="M12 22c2.2 0 3.9-1.2 4.8-3.1.6-1.1.9-2.4.9-3.9 0-1.5-.3-2.8-.9-3.9-.9-1.9-2.6-3.1-4.8-3.1s-3.9 1.2-4.8 3.1c-.6 1.1-.9 2.4-.9 3.9 0 1.5.3 2.8.9 3.9C8.1 20.8 9.8 22 12 22zm0-1.5c-1.4 0-2.5-.8-3.2-2.1-.4-.8-.6-1.8-.6-2.9 0-1.1.2-2.1.6-2.9.7-1.3 1.8-2.1 3.2-2.1s2.5.8 3.2 2.1c.4.8.6 1.8.6 2.9 0 1.1-.2 2.1-.6 2.9-1.2 1.3-2.3 2.1-3.7 2.1z"/></svg>` },
+    { name: "Next.js", color: "#ECEFF4", icon: `<svg viewBox="0 0 24 24"><path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.593-2.404-3.559a339.55 339.55 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.516-.052 3.596a.426.426 0 0 1-.206.213c-.075.038-.14.045-.495.045H7.81l-.108-.068a.44.44 0 0 1-.157-.171l-.05-.106.005-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 2 2.895 4.362a10760.433 10760.433 0 0 0 4.735 7.181l1.9 2.878.096-.063a12.318 12.318 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.6 12.6 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z"/></svg>` },
+    { name: "Node.js", color: "#56C2B0", icon: `<svg viewBox="0 0 24 24"><path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072 c-0.081-0.047-0.189-0.047-0.271,0L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235 l2.409,1.392c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253 v10.021c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.604l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082 c0.57,0.329,0.924,0.945,0.924,1.604v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078 C12.643,23.916,12.324,24,11.998,24z M19.099,13.993c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187 c0-0.528,0.235-1.233,2.258-1.233c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141 c0.071,0,0.138-0.031,0.186-0.081c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076 c-2.508,0-4.004,1.058-4.004,2.833c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269 c0,0.983-0.789,1.402-2.642,1.402c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.216-0.253-0.216h-1.137 c-0.141,0-0.253,0.112-0.253,0.253c0,1.482,0.806,3.248,4.654,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"/></svg>` },
+    { name: "MongoDB", color: "#8C8FE8", icon: `<svg viewBox="0 0 24 24"><path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z"/></svg>` },
+    { name: "Express", color: "#F2B33D", icon: `<svg viewBox="0 0 24 24"><path d="M24 18.588a1.529 1.529 0 01-1.895-.72l-3.45-4.771-.5-.667-4.003 5.444a1.466 1.466 0 01-1.802.708l5.158-6.92-4.798-6.251a1.595 1.595 0 011.9.666l3.576 4.83 3.596-4.81a1.435 1.435 0 011.788-.668L21.708 7.9l-2.522 3.283a.666.666 0 000 .994l4.804 6.412zM.002 11.576l.42-2.075c1.154-4.103 5.858-5.81 9.094-3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 002.582-2.876c.02-.037.037-.075.038-.077 1.163.34 2.326.679 3.526.99-.006.038-.014.076-.028.113-1.007 3.216-3.235 5.148-6.626 5.417-4.283.348-8.043-2.336-8.926-6.437-.02-.088-.042-.174-.043-.263z"/></svg>` },
+    { name: "SQL", color: "#E8735B", icon: `<svg viewBox="0 0 24 24"><path d="M12.75 2c-2.688 0-5.13.512-6.899 1.343C4.11 4.157 3 5.373 3 6.75v10.5c0 1.377 1.11 2.593 2.851 3.407C7.62 21.488 10.062 22 12.75 22c2.688 0 5.13-.512 6.899-1.343C21.39 19.843 22.5 18.627 22.5 17.25V6.75c0-1.377-1.11-2.593-2.851-3.407C17.88 2.512 15.438 2 12.75 2Zm0 1.5c2.454 0 4.653.481 6.2 1.208 1.548.727 2.05 1.593 2.05 2.042 0 .449-.502 1.315-2.05 2.042-1.547.727-3.746 1.208-6.2 1.208-2.454 0-4.653-.481-6.2-1.208C5.002 8.065 4.5 7.199 4.5 6.75c0-.449.502-1.315 2.05-2.042C8.097 3.981 10.296 3.5 12.75 3.5Z"/></svg>` }
+  ];
 
-    const layers = [{
-      name: "HTML",
-      color: "#E8735B",
-      icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622H5.412l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>`
-    }, {
-      name: "CSS",
-      color: "#F2B33D",
-      icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>`
-    }, {
-      name: "JavaScript",
-      color: "#8C8FE8",
-      icon: `<svg viewBox="0 0 24 24"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.402-3.346V11.03z"/></svg>`
-    }, {
-      name: "TypeScript",
-      color: "#56C2B0",
-      icon: `<svg viewBox="0 0 24 24"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.25 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.033.872-.098.249-.065.456-.156.623-.272a1.172 1.172 0 0 0 .481-.977.985.985 0 0 0-.148-.554c-.145-.19-.315-.352-.516-.494a4.517 4.517 0 0 0-.686-.427 21.83 21.83 0 0 0-.877-.417 8.887 8.887 0 0 1-1.166-.618 3.874 3.874 0 0 1-.86-.727 2.914 2.914 0 0 1-.526-.869 2.949 2.949 0 0 1-.185-1.065c0-.554.129-1.03.386-1.428a3.02 3.02 0 0 1 1.043-.982c.436-.259.937-.45 1.503-.573a8.13 8.13 0 0 1 1.775-.19zm-8.7.15h6.6v2.078H12.9v9.947H9.6v-9.947H6.15v-2.078z"/></svg>`
-    }, {
-      name: "React",
-      color: "#E8735B",
-      icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M12 2C9.8 2 8.1 3.2 7.2 5.1c-.6 1.1-.9 2.4-.9 3.9 0 1.5.3 2.8.9 3.9.9 1.9 2.6 3.1 4.8 3.1s3.9-1.2 4.8-3.1c.6-1.1.9-2.4.9-3.9 0-1.5-.3-2.8-.9-3.9C15.9 3.2 14.2 2 12 2zm0 1.5c1.4 0 2.5.8 3.2 2.1.4.8.6 1.8.6 2.9 0 1.1-.2 2.1-.6 2.9-.7 1.3-1.8 2.1-3.2 2.1s-2.5-.8-3.2-2.1c-.4-.8-.6-1.8-.6-2.9 0-1.1.2-2.1.6-2.9C9.5 4.3 10.6 3.5 12 3.5z"/><path d="M12 22c2.2 0 3.9-1.2 4.8-3.1.6-1.1.9-2.4.9-3.9 0-1.5-.3-2.8-.9-3.9-.9-1.9-2.6-3.1-4.8-3.1s-3.9 1.2-4.8 3.1c-.6 1.1-.9 2.4-.9 3.9 0 1.5.3 2.8.9 3.9C8.1 20.8 9.8 22 12 22zm0-1.5c-1.4 0-2.5-.8-3.2-2.1-.4-.8-.6-1.8-.6-2.9 0-1.1.2-2.1.6-2.9.7-1.3 1.8-2.1 3.2-2.1s2.5.8 3.2 2.1c.4.8.6 1.8.6 2.9 0 1.1-.2 2.1-.6 2.9-1.2 1.3-2.3 2.1-3.7 2.1z"/></svg>`
-    }, {
-      name: "Next.js",
-      color: "#ECEFF4",
-      icon: `<svg viewBox="0 0 24 24"><path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.593-2.404-3.559a339.55 339.55 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.516-.052 3.596a.426.426 0 0 1-.206.213c-.075.038-.14.045-.495.045H7.81l-.108-.068a.44.44 0 0 1-.157-.171l-.05-.106.005-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 2 2.895 4.362a10760.433 10760.433 0 0 0 4.735 7.181l1.9 2.878.096-.063a12.318 12.318 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.6 12.6 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z"/></svg>`
-    }, {
-      name: "Node.js",
-      color: "#56C2B0",
-      icon: `<svg viewBox="0 0 24 24"><path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072 c-0.081-0.047-0.189-0.047-0.271,0L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235 l2.409,1.392c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253 v10.021c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.604l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082 c0.57,0.329,0.924,0.945,0.924,1.604v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078 C12.643,23.916,12.324,24,11.998,24z M19.099,13.993c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187 c0-0.528,0.235-1.233,2.258-1.233c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141 c0.071,0,0.138-0.031,0.186-0.081c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076 c-2.508,0-4.004,1.058-4.004,2.833c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269 c0,0.983-0.789,1.402-2.642,1.402c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.216-0.253-0.216h-1.137 c-0.141,0-0.253,0.112-0.253,0.253c0,1.482,0.806,3.248,4.654,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"/></svg>`
-    }, {
-      name: "MongoDB",
-      color: "#8C8FE8",
-      icon: `<svg viewBox="0 0 24 24"><path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z"/></svg>`
-    }, {
-      name: "Express",
-      color: "#F2B33D",
-      icon: `<svg viewBox="0 0 24 24"><path d="M24 18.588a1.529 1.529 0 01-1.895-.72l-3.45-4.771-.5-.667-4.003 5.444a1.466 1.466 0 01-1.802.708l5.158-6.92-4.798-6.251a1.595 1.595 0 011.9.666l3.576 4.83 3.596-4.81a1.435 1.435 0 011.788-.668L21.708 7.9l-2.522 3.283a.666.666 0 000 .994l4.804 6.412zM.002 11.576l.42-2.075c1.154-4.103 5.858-5.81 9.094-3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 002.582-2.876c.02-.037.037-.075.038-.077 1.163.34 2.326.679 3.526.99-.006.038-.014.076-.028.113-1.007 3.216-3.235 5.148-6.626 5.417-4.283.348-8.043-2.336-8.926-6.437-.02-.088-.042-.174-.043-.263z"/></svg>`
-    }, {
-      name: "SQL",
-      color: "#E8735B",
-      icon: `<svg viewBox="0 0 24 24"><path d="M12.75 2c-2.688 0-5.13.512-6.899 1.343C4.11 4.157 3 5.373 3 6.75v10.5c0 1.377 1.11 2.593 2.851 3.407C7.62 21.488 10.062 22 12.75 22c2.688 0 5.13-.512 6.899-1.343C21.39 19.843 22.5 18.627 22.5 17.25V6.75c0-1.377-1.11-2.593-2.851-3.407C17.88 2.512 15.438 2 12.75 2Zm0 1.5c2.454 0 4.653.481 6.2 1.208 1.548.727 2.05 1.593 2.05 2.042 0 .449-.502 1.315-2.05 2.042-1.547.727-3.746 1.208-6.2 1.208-2.454 0-4.653-.481-6.2-1.208C5.002 8.065 4.5 7.199 4.5 6.75c0-.449.502-1.315 2.05-2.042C8.097 3.981 10.296 3.5 12.75 3.5Z"/></svg>`
-    }];
+  const stackEl = document.getElementById('stackLayers');
+  function buildChip(layer) {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.style.setProperty('--chip-color', layer.color);
+    chip.innerHTML = `<span class="chip-icon">${layer.icon}</span><span class="chip-name mono">${layer.name}</span>`;
+    return chip;
+  }
+  [...layers, ...layers].forEach(layer => stackEl.appendChild(buildChip(layer)));
 
-    const stackEl = document.getElementById('stackLayers');
+  // ── Skills ──
+  const skills = [
+    { label: "Performance Marketing", sub: "Campaigns · ROI · analytics", color: "#F2B33D", icon: `<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-6M21 7v6"/></svg>` },
+    { label: "SMM Marketing", sub: "Social strategy · growth", color: "#8C8FE8", icon: `<svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg>` },
+    { label: "Graphic Design", sub: "Branding · UI · visual assets", color: "#56C2B0", icon: `<svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>` },
+    { label: "Video Editor", sub: "Editing · motion · reels", color: "#E8735B", icon: `<svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="14" height="13" rx="2"/><path d="M16.5 9.5l5-3v11l-5-3z"/></svg>` },
+    { label: "Web Developer", sub: "Frontend · backend · full stack", color: "#F2B33D", icon: `<svg viewBox="0 0 24 24"><polyline points="9 8 5 12 9 16"/><polyline points="15 8 19 12 15 16"/><line x1="13" y1="5" x2="11" y2="19"/></svg>` }
+  ];
+  const skillsGridEl = document.getElementById('skillsGrid');
+  skills.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.style.setProperty('--card-color', s.color);
+    card.innerHTML = `<span class="skill-icon">${s.icon}</span><div><div class="skill-label">${s.label}</div><div class="skill-sub">${s.sub}</div></div>`;
+    skillsGridEl.appendChild(card);
+  });
 
-    function buildChip(layer) {
-      const chip = document.createElement('div');
-      chip.className = 'chip';
-      chip.style.setProperty('--chip-color', layer.color);
-      chip.innerHTML = `
-        <span class="chip-icon">${layer.icon}</span>
-        <span class="chip-name mono">${layer.name}</span>
-      `;
-      return chip;
-    }
-
-    [...layers, ...layers].forEach(layer => stackEl.appendChild(buildChip(layer)));
-
-    // ── Skills
-    const skills = [{
-      label: "Performance Marketing",
-      sub: "Campaigns · ROI · analytics",
-      color: "#F2B33D",
-      icon: `<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-6M21 7v6"/></svg>`
-    }, {
-      label: "SMM Marketing",
-      sub: "Social strategy · growth",
-      color: "#8C8FE8",
-      icon: `<svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg>`
-    }, {
-      label: "Graphic Design",
-      sub: "Branding · UI · visual assets",
-      color: "#56C2B0",
-      icon: `<svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`
-    }, {
-      label: "Video Editor",
-      sub: "Editing · motion · reels",
-      color: "#E8735B",
-      icon: `<svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="14" height="13" rx="2"/><path d="M16.5 9.5l5-3v11l-5-3z"/></svg>`
-    }, {
-      label: "Web Developer",
-      sub: "Frontend · backend · full stack",
-      color: "#F2B33D",
-      icon: `<svg viewBox="0 0 24 24"><polyline points="9 8 5 12 9 16"/><polyline points="15 8 19 12 15 16"/><line x1="13" y1="5" x2="11" y2="19"/></svg>`
-    }];
-
-    const skillsGridEl = document.getElementById('skillsGrid');
-    skills.forEach(s => {
-      const card = document.createElement('div');
-      card.className = 'skill-card';
-      card.style.setProperty('--card-color', s.color);
-      card.innerHTML = `
-        <span class="skill-icon">${s.icon}</span>
-        <div>
-          <div class="skill-label">${s.label}</div>
-          <div class="skill-sub">${s.sub}</div>
-        </div>
-      `;
-      skillsGridEl.appendChild(card);
-    });
-
-    const projects = [{
-      kicker: "COMMERCE",
-      color: "#E8735B",
-      title: "E-Commerce Website",
-      desc: "A full online store built on the MERN stack — product catalog, cart, checkout flow, and an admin side for managing inventory and orders.",
-      tags: ["React", "Node.js", "MongoDB", "Express"],
-      live: "https://sibkhwhite.vercel.app/"
-    }, {
-      kicker: "BRAND",
-      color: "#F2B33D",
-      title: "Business Website",
-      desc: "A fast, responsive site for a business to showcase services and convert visitors — clean structure, easy to update, built to load quickly.",
-      tags: ["Next.js", "React", "SQL"],
-      live: "https://gsdvs.vercel.app/"
-    }, {
-      kicker: "AUTOMATION",
-      color: "#8C8FE8",
-      title: "WhatsApp Chat Bot",
-      desc: "An automated bot that handles customer queries and order updates directly over WhatsApp, cutting down manual replies. Built with friend Shahid.",
-      tags: ["Node.js", "WhatsApp API", "JavaScript"],
-      live: "https://github.com/Xirtexe/Zoe",
-      helper: "Shahid"
-    }, {
-      kicker: "EVENT",
-      color: "#56C2B0",
-      title: "Wedding Invitation Website",
-      desc: "A digital invitation site with event details, countdown, photo gallery, and RSVP collection — built for a single day, made to be shared.",
-      tags: ["React", "Next.js", "MongoDB"],
-      live: "https://munawarlabeeba.vercel.app/"
-    }];
-
-    const gridEl = document.getElementById('projectGrid');
-    projects.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'project-card';
-      card.style.setProperty('--card-color', p.color);
-      card.innerHTML = `
-        <div class="project-kicker mono">${p.kicker}</div>
-        <h3>${p.title} ${p.helper ? `<span style="color:var(--text-dim);font-size:0.8rem;font-weight:400;">· with ${p.helper}</span>` : ''}</h3>
-        <p>${p.desc}</p>
-        <div class="project-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
-        <div class="project-links">
-          <a href="${p.live}" target="_blank" rel="noopener" class="btn-sm">
-            <span>Live</span> <span class="arrow">→</span>
-          </a>
-        </div>
-      `;
-      gridEl.appendChild(card);
-    });
-  </script>
+  // ── Projects ──
+  const projects = [
+    { kicker: "COMMERCE", color: "#E8735B", title: "E-Commerce Website", desc: "A full online store built on the MERN stack — product catalog, cart, checkout flow, and an admin side for managing inventory and orders.", tags: ["React","Node.js","MongoDB","Express"], live: "https://sibkhwhite.vercel.app/" },
+    { kicker: "BRAND", color: "#F2B33D", title: "Business Website", desc: "A fast, responsive site for a business to showcase services and convert visitors — clean structure, easy to update, built to load quickly.", tags: ["Next.js","React","SQL"], live: "https://gsdvs.vercel.app/" },
+    { kicker: "AUTOMATION", color: "#8C8FE8", title: "WhatsApp Chat Bot", desc: "An automated bot that handles customer queries and order updates directly over WhatsApp, cutting down manual replies. Built with friend Shahid.", tags: ["Node.js","WhatsApp API","JavaScript"], live: "https://github.com/Xirtexe/Zoe", helper: "Shahid" },
+    { kicker: "EVENT", color: "#56C2B0", title: "Wedding Invitation Website", desc: "A digital invitation site with event details, countdown, photo gallery, and RSVP collection — built for a single day, made to be shared.", tags: ["React","Next.js","MongoDB"], live: "https://munawarlabeeba.vercel.app/" }
+  ];
+  const gridEl = document.getElementById('projectGrid');
+  projects.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.style.setProperty('--card-color', p.color);
+    card.innerHTML = `
+      <div class="project-kicker mono">${p.kicker}</div>
+      <h3>${p.title} ${p.helper ? `<span style="color:var(--text-dim);font-size:0.8rem;font-weight:400;">· with ${p.helper}</span>` : ''}</h3>
+      <p>${p.desc}</p>
+      <div class="project-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="project-links"><a href="${p.live}" target="_blank" rel="noopener" class="btn-sm"><span>Live</span> <span class="arrow">→</span></a></div>
+    `;
+    gridEl.appendChild(card);
+  });
+</script>
 </body>
   </html>
