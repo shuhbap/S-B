@@ -58,23 +58,22 @@
       transition: color 0.2s ease; position: relative;
     }
     .nav-links a:hover { color: var(--text); }
-    .nav-links a::before { content: "./"; color: var(--amber); }
 
     .nav-toggle {
-      display: none; width: 40px; height: 40px;
-      border: 1px solid var(--border); border-radius: 8px;
+      display: none; width: 34px; height: 34px;
+      border: 1px solid var(--border); border-radius: 7px;
       background: var(--surface); cursor: pointer;
       align-items: center; justify-content: center; flex-direction: column;
-      gap: 5px; z-index: 110;
+      gap: 4px; z-index: 110;
     }
     .nav-toggle span {
-      display: block; width: 18px; height: 2px;
+      display: block; width: 14px; height: 1.5px;
       background: var(--text); border-radius: 2px;
       transition: transform 0.25s ease, opacity 0.25s ease;
     }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
     .mobile-menu {
       display: none; position: fixed; top: 72px; left: 0; right: 0;
@@ -90,7 +89,6 @@
       border-bottom: 1px solid var(--border);
     }
     .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a::before { content: "./"; color: var(--amber); }
 
     .hero {
       min-height: 100vh; display: flex; flex-direction: column;
@@ -149,10 +147,11 @@
     }
     h1.name .accent { color: var(--amber); }
     .role {
-      font-size: clamp(1.1rem, 2.4vw, 1.5rem); color: var(--text-dim);
-      max-width: 600px; margin-bottom: 36px; font-weight: 400;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(1rem, 2vw, 1.25rem); color: var(--amber);
+      letter-spacing: 0.1em; font-weight: 600;
+      max-width: 600px; margin-bottom: 36px;
     }
-    .role strong { color: var(--text); font-weight: 500; }
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
     .btn {
@@ -283,23 +282,22 @@
     .contact-section .section-title { font-size: clamp(2rem, 6vw, 3.2rem); margin-bottom: 20px; }
     .contact-cta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 36px; }
 
-    /* ── Social icons only, no box ── */
     .social-row {
       display: flex; justify-content: center; align-items: center;
-      gap: 28px; flex-wrap: wrap; margin-top: 32px;
+      gap: 18px; flex-wrap: wrap; margin-top: 32px;
     }
     .social-link {
       display: inline-flex; align-items: center; justify-content: center;
-      width: 48px; height: 48px; border-radius: 12px;
+      width: 38px; height: 38px; border-radius: 10px;
       color: var(--text-dim); transition: all 0.2s ease;
-      border: 1px solid transparent;
+      border: 1px solid var(--border);
     }
     .social-link:hover {
       color: var(--text); border-color: var(--amber);
-      transform: translateY(-4px); background: var(--surface);
+      transform: translateY(-3px); background: var(--surface);
     }
     .social-link svg {
-      width: 28px; height: 28px; fill: none; stroke: currentColor;
+      width: 17px; height: 17px; fill: none; stroke: currentColor;
       stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
       transition: stroke 0.2s ease;
     }
@@ -322,9 +320,9 @@
       .hero .wrap { flex-direction: column-reverse; text-align: left; gap: 32px; }
       .hero-photo-wrap { width: 140px; height: 140px; }
       .about-grid { grid-template-columns: 1fr; }
-      .social-row { gap: 18px; }
-      .social-link { width: 42px; height: 42px; }
-      .social-link svg { width: 24px; height: 24px; }
+      .social-row { gap: 14px; }
+      .social-link { width: 36px; height: 36px; }
+      .social-link svg { width: 16px; height: 16px; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
@@ -362,7 +360,7 @@
     <div class="hero-copy">
       <div class="eyebrow mono">AVAILABLE FOR WORK</div>
       <h1 class="name">Shuhaib <span class="accent">AP</span></h1>
-      <p class="role">Full stack <strong>MERN developer</strong> — building web apps from the database up, one layer at a time.</p>
+      <p class="role">MERN STACK DEVELOPER</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View projects</a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
@@ -445,7 +443,6 @@
       <a href="mailto:shuhaiiibap@gmail.com" class="btn btn-ghost">Say hello</a>
     </div>
 
-    <!-- ── SOCIAL ICONS ONLY, NO BOX ── -->
     <div class="social-row">
       <a href="mailto:shuhaiiibap@gmail.com" class="social-link" aria-label="Email">
         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -470,11 +467,10 @@
 </section>
 
 <footer>
-  <div class="wrap">Designed &amp; built by Shuhaib AP — HTML to SQL, no layer skipped.</div>
+  <div class="wrap">All Rights Reserved Shuhaib Ap 2026</div>
 </footer>
 
 <script>
-  // ── Mobile menu toggle ──
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
 
@@ -492,7 +488,6 @@
     });
   });
 
-  // ── Stack layers ──
   const layers = [
     { name: "HTML", color: "#E8735B", icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622H5.412l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>` },
     { name: "CSS", color: "#F2B33D", icon: `<svg viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>` },
@@ -516,7 +511,6 @@
   }
   [...layers, ...layers].forEach(layer => stackEl.appendChild(buildChip(layer)));
 
-  // ── Skills ──
   const skills = [
     { label: "Performance Marketing", sub: "Campaigns · ROI · analytics", color: "#F2B33D", icon: `<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-6M21 7v6"/></svg>` },
     { label: "SMM Marketing", sub: "Social strategy · growth", color: "#8C8FE8", icon: `<svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg>` },
@@ -533,7 +527,6 @@
     skillsGridEl.appendChild(card);
   });
 
-  // ── Projects ──
   const projects = [
     { kicker: "COMMERCE", color: "#E8735B", title: "E-Commerce Website", desc: "A full online store built on the MERN stack — product catalog, cart, checkout flow, and an admin side for managing inventory and orders.", tags: ["React","Node.js","MongoDB","Express"], live: "https://sibkhwhite.vercel.app/" },
     { kicker: "BRAND", color: "#F2B33D", title: "Business Website", desc: "A fast, responsive site for a business to showcase services and convert visitors — clean structure, easy to update, built to load quickly.", tags: ["Next.js","React","SQL"], live: "https://gsdvs.vercel.app/" },
